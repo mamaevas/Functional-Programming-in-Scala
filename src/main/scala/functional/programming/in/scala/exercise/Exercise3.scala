@@ -75,6 +75,7 @@ object Exercise3 extends App {
      */
     @tailrec
     def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+        case Nil => Nil
         case Cons(x, xs) =>
             if (f(x)) Cons(x, xs)
             else dropWhile(xs, f)

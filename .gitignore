@@ -1,6 +1,5 @@
 .bsp/
 .idea/
-build.sbt
 null/
-project/
+project/target
 target/
