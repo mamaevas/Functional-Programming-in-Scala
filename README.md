@@ -1,0 +1,1 @@
+This project holds all my exercise answers to the book Functional Programming in Scala.
