@@ -89,4 +89,12 @@ class Exercise3Test extends AnyFlatSpec with Matchers {
         foldRightViaLeft(List(1, 2, 3), -4)((next, acc) => acc - next) shouldBe -10
         foldRightViaLeft(List(1, 2, 3), -4)(_ - _) shouldBe 6
     }
+
+    "Exercise 3.14" should "Implement append in terms of either foldLeft or foldRight" in {
+        appendFoldLeft(List(1, 2, 3), 4) shouldBe List(1, 2, 3, 4)
+    }
+
+    "Exercise 3.15" should "Write a function that concatenates a list of lists into a single list" in {
+        concat(List(1, 2, 3), List(4, 5, 6)) shouldBe List(1, 2, 3, 4, 5, 6)
+    }
 }
