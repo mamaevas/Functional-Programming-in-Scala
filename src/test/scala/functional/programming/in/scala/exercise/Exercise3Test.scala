@@ -96,5 +96,38 @@ class Exercise3Test extends AnyFlatSpec with Matchers {
 
     "Exercise 3.15" should "Write a function that concatenates a list of lists into a single list" in {
         concat(List(1, 2, 3), List(4, 5, 6)) shouldBe List(1, 2, 3, 4, 5, 6)
+        concat(List(List(1, 2, 3), List(4, 5, 6))) shouldBe List(1, 2, 3, 4, 5, 6)
+    }
+
+    "Exercise 3.16" should "transforms a list of integers by adding 1 to each element" in {
+        appender1(List(1, 2, 3)) shouldBe List(2, 3, 4)
+    }
+
+    "Exercise 3.17" should "turns each value in a List[Double] into a String" in {
+        doubleToStringList(List(1.0, 2.1, 3.2)) shouldBe List("1.0", "2.1", "3.2")
+    }
+
+    "Exercise 3.18" should "map that generalizes modifying each element in a list while maintaining the structure of the list" in {
+        map(List(1, 2, 3))((a: Int) => a * 2) shouldBe List(2, 4, 6)
+    }
+
+    "Exercise 3.19" should "filter elements from a list unless they satisfy a given predicate" in {
+        filter(List(1, 2, 3))(_ % 2 == 0) shouldBe List(2)
+    }
+
+    "Exercise 3.20" should "flatMap" in {
+        flatMap(List(1, 2, 3))(i => List(i.toString, (i * 2).toString)) shouldBe List("1", "2", "2", "4", "3", "6")
+    }
+
+    "Exercise 3.21" should "filter via flatmap" in {
+        filterViaFlatMap(List(1, 2, 3))(_ % 2 == 0) shouldBe List(2)
+    }
+
+    "Exercise 3.22" should "accepts two lists and constructs a new list by adding corresponding elements" in {
+        elementAddition(List(1, 2, 3), List(4, 5, 6)) shouldBe List(5, 7, 9)
+    }
+
+    "Exercise 3.23" should "zipWith" in {
+        zipWith(List(1, 2, 3), List(4, 5, 6), (a: Int, b: Int) => a + b) shouldBe List(5, 7, 9)
     }
 }

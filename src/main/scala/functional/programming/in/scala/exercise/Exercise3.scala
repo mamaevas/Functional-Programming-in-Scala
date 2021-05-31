@@ -148,4 +148,82 @@ object List {
      */
     def concat[A](a: List[A], b: List[A]): List[A] =
         foldRightViaLeft(a, b)((next, acc) => Cons(next, acc))
+
+    def concat[A](a: List[List[A]]): List[A] =
+        foldLeft(a, List[A]())((acc, next) => concat(acc, next))
+
+    /**
+     * Write a function that transforms a list of integers by adding 1 to each element
+     */
+    def appender1(a: List[Int]): List[Int] = {
+        foldRightViaLeft(a, List[Int]())((next, acc) => Cons(next + 1, acc))
+    }
+
+    /**
+     * Write a function that turns each value in a List[Double] into a String
+     */
+    def doubleToStringList(a: List[Double]): List[String] =
+        foldRightViaLeft(a, List[String]())((next, acc) => Cons(next.toString, acc))
+
+    /**
+     * Write a function map that generalizes modifying each element in a list while maintaining the structure of the list.
+     */
+    def map[A, B](as: List[A])(f: A => B): List[B] =
+        foldRightViaLeft(as, List[B]())((next, acc) => Cons(f(next), acc))
+
+    /**
+     * Write a function filter that removes elements from a list unless they satisfy a given predicate
+     */
+    def filter[A](as: List[A])(f: A => Boolean): List[A] =
+        foldRightViaLeft(as, List[A]()) { (next, acc) =>
+            if (f(next)) Cons(next, acc)
+            else acc
+        }
+
+    /**
+     * Write a function flatMap that works like map except that the function given will return
+     * a list instead of a single result, and that list should be inserted into the final resulting
+     * list
+     */
+    def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] =
+        foldRightViaLeft(as, List[B]())((next, acc) => concat(f(next), acc))
+
+    /**
+     * Use flatMap to implement filter
+     */
+    def filterViaFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
+        flatMap(as)(a => if (f(a)) List(a) else List[A]())
+
+    /**
+     * Write a function that accepts two lists and constructs a new list by adding corresponding elements.
+     * For example, List(1,2,3) and List(4,5,6) become List(5,7,9).
+     */
+    def elementAddition(a: List[Int], b: List[Int]): List[Int] = {
+        def elementAdditionInner(a: List[Int], b: List[Int]): (List[Int], List[Int]) =
+            foldLeft(a, (List[Int](), b)) {
+                case ((acc, _b), next) =>
+                    _b match {
+                        case Nil => (acc, Nil)
+                        case Cons(h, tail) => (Cons(next + h, acc), tail)
+                    }
+            }
+
+        reverse(elementAdditionInner(a, b)._1)
+    }
+
+    /**
+     * Generalize previous function
+     */
+    def zipWith[A, B, C](a: List[A], b: List[B], f: (A, B) => C): List[C] = {
+        def elementAdditionInner(a: List[A], b: List[B]): (List[C], List[B]) =
+            foldLeft(a, (List[C](), b)) {
+                case ((acc, _b), next) =>
+                    _b match {
+                        case Nil => (acc, Nil)
+                        case Cons(h, tail) => (Cons(f(next, h), acc), tail)
+                    }
+            }
+
+        reverse(elementAdditionInner(a, b)._1)
+    }
 }
