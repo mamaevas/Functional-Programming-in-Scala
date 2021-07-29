@@ -3,7 +3,7 @@ package functional.programming.in.scala.exercise
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-class Exercise3Test extends AnyFlatSpec with Matchers {
+class Exercise3ListTest extends AnyFlatSpec with Matchers {
 
     import List._
 
