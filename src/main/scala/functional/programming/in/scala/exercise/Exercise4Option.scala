@@ -59,15 +59,12 @@ object Option {
    * with a list of all the values.
    * */
   def sequence[A](a: List[Option[A]]): Option[List[A]] =
-    List.foldLeft(a, Option(List.empty[A])) { (acc, next) =>
-      map2(acc, next)((a, b) => List.concat(a, List(b)))
-    }
+    traverse(a)(identity)
 
   /** Exercise 4.5 */
-  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = {
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] =
     List.foldLeft(a, Option(List.empty[B])) { (acc, next) =>
       map2(acc, f(next))((a, b) => List.concat(a, List(b)))
     }
-  }
 
 }
