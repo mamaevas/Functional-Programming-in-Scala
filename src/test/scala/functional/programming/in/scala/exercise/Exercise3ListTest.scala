@@ -5,6 +5,8 @@ import org.scalatest.matchers.should.Matchers
 
 class Exercise3ListTest extends AnyFlatSpec with Matchers {
 
+  import Exercise3List._
+
   import List._
 
   "foldRight" should "be fine" in {

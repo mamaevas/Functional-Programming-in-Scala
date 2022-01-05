@@ -5,6 +5,9 @@ import org.scalatest.matchers.should.Matchers
 
 class Exercise4EitherTest extends AnyFlatSpec with Matchers {
 
+  import Exercise4Either._
+  import Exercise3List._
+
   it should "map" in {
     Right(42).map(_ + 1) shouldBe Right(43)
     Left(42).map(_ => 1) shouldBe Left(42)

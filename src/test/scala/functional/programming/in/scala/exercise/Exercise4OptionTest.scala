@@ -5,6 +5,10 @@ import org.scalatest.matchers.should.Matchers
 
 class Exercise4OptionTest extends AnyFlatSpec with Matchers {
 
+  import Exercise3List._
+  import Exercise4Option.Option._
+  import Exercise4Option._
+
   it should "apply" in {
     Option(null) shouldBe None
     Option(42) shouldBe Some(42)
@@ -42,13 +46,11 @@ class Exercise4OptionTest extends AnyFlatSpec with Matchers {
   }
 
   it should "variance" in {
-    import Option._
     variance(Seq(1, 2, 3, 4, 5)) shouldBe Some(2)
     variance(Seq()) shouldBe None
   }
 
   it should "map2" in {
-    import Option._
     map2(Some(42), Some(1))(_ + _) shouldBe Some(43)
     map2(Some(42), None)(_ + _) shouldBe None
     map2(Option.empty[Int], Some(42))(_ + _) shouldBe None
@@ -56,14 +58,12 @@ class Exercise4OptionTest extends AnyFlatSpec with Matchers {
   }
 
   it should "sequence" in {
-    import Option._
     sequence(List(Some(1), Some(2), Some(3))) shouldBe Some(List(1, 2, 3))
     sequence(List(Some(1), None, Some(3))) shouldBe None
     sequence(List(None, None, None)) shouldBe None
   }
 
   it should "traverse" in {
-    import Option._
     traverse(List(1, 2, 3))(a => Some(a)) shouldBe Some(List(1, 2, 3))
     traverse(List(1, 2, 3))(a => if (a % 2 == 0) None else Some(a)) shouldBe None
     traverse(List.empty[Int])(a => Some(a)) shouldBe Some(List.empty[Int])

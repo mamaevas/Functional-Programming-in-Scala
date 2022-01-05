@@ -5,6 +5,8 @@ import org.scalatest.matchers.should.Matchers
 
 class Exercise3TreeTest extends AnyFlatSpec with Matchers {
 
+  import Exercise3Tree._
+
   it should "size" in {
     val testTree: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
     Tree.size(testTree) shouldBe 7
